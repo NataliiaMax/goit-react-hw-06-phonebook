@@ -1,46 +1,43 @@
-import { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import style from './AddForm.module.css';
-import PropTypes from 'prop-types';
+import { addContacts } from 'redux/contacts/contactsSlice';
+import { getContacts } from '../../redux/contacts/contactsSelectors';
+import { toast } from 'react-toastify';
 
-export default function ContactForm({ addUser }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+const initialValues = { name: '', number: '' };
+export default function ContactForm() {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
+  // const onAddContacts = () => {
+  //   const newContact = { newName: name, newNumber: number };
+  //   dispatch(addContacts(newContact));
+  // };
   const handleSubmit = event => {
     event.preventDefault();
-    addUser({ name, number });
+    if (contacts.some(contact => contact.name === event.name)) {
+      toast('Contact is already in contact list');
+    } else dispatch(addContacts(event));
+
+    // addUser({ name, number });
     resetForm();
   };
 
   const resetForm = () => {
-    setName('');
-    setNumber('');
-  };
-
-  const handleChange = event => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        return;
-    }
+    // initialQuery('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form initialValues={initialValues} onSubmit={handleSubmit}>
       <div className={style.containerInput}>
         <label className={style.formLabel}>
           Name
           <input
             className={style.formInput}
-            value={name}
+            // value='name'
             type="text"
-            onChange={handleChange}
+            // onChange={handleChange}
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
@@ -56,18 +53,18 @@ export default function ContactForm({ addUser }) {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={number}
-            onChange={handleChange}
+            // value={number}
+            // onChange={handleChange}
           />
         </label>
       </div>
-      <button type="submit" className={style.buttonForm}>
+      <button
+        type="submit"
+        className={style.buttonForm}
+        // onClick={onAddContacts}
+      >
         Add contact
       </button>
     </form>
   );
 }
-
-ContactForm.propTypes = {
-  addUser: PropTypes.func.isRequired
-};
