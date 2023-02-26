@@ -8,27 +8,11 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-// import { contactsReducer } from './contacts/contactsSlice';
-import {persistedContactsReducer} from './contacts/contactsSlice'
-// import notificationsReducer from '../n otifications/redux/notifications.slice';
-// import { notificationsMiddleware } from '../notifications/redux/notifications.middlewere';
 
-// const persistConfig = {
-//   key: 'root',
-//   storage,
-//   // blacklist: ['notifications'],
-// };
+import rootReducer from './root-reducer';
 
-// const rootReducer = combineReducers({
-//   contacts: contactsReducer,
-//   // notifications: notificationsReducer,
-// });
-
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const store = configureStore({
-  reducer: {contacts: persistedContactsReducer},
+export const store = configureStore({
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -36,6 +20,5 @@ const store = configureStore({
       },
     }),
 });
-const persistor = persistStore(store);
 
-export { store, persistor };
+export const persistor = persistStore(store);
