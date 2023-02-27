@@ -16,11 +16,7 @@ export default function ContactForm() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    setName('');
-    setNumber('');
-  };
 
-  const createContact = () => {
     const newContacts = {
       id: nanoid(),
       name: name,
@@ -36,7 +32,8 @@ export default function ContactForm() {
       return alert(`${name} is already in contacts`);
     }
     dispatch(addContact(newContacts));
-   
+    setName('');
+    setNumber('');
   };
 
   const handleChange = event => {
@@ -85,11 +82,7 @@ export default function ContactForm() {
           />
         </label>
       </div>
-      <button
-        type="submit"
-        onClick={createContact}
-        className={style.buttonForm}
-      >
+      <button type="submit" className={style.buttonForm}>
         Add contact
       </button>
     </form>
