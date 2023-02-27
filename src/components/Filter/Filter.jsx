@@ -18,7 +18,7 @@ export default function Filter() {
         id={filterId}
         type="text"
         value={filterQuery}
-        onChange={e => dispatch(setFilter(e.target.value))}
+        onChange={e => dispatch(setFilter(e.currentTarget.value))}
       />
     </label>
   );
