@@ -18,9 +18,9 @@ export default function ContactForm() {
     event.preventDefault();
     setName('');
     setNumber('');
-  // };
+  };
 
-  // const createContact = () => {
+  const createContact = () => {
     const newContacts = {
       id: nanoid(),
       name: name,
@@ -87,7 +87,7 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        // onClick={createContact}
+        onClick={createContact}
         className={style.buttonForm}
       >
         Add contact
