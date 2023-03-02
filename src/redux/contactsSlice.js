@@ -15,7 +15,7 @@ const contactsSlice = createSlice({
   initialState,
   reducers: {
     addContact: {
-      reducer: (state, {payload}) => {
+      reducer: (state, { payload }) => {
         state.push(payload);
       },
       prepare: data => {
@@ -27,7 +27,7 @@ const contactsSlice = createSlice({
         };
       },
     },
-    deleteContact: (state, {payload}) =>
+    deleteContact: (state, { payload }) =>
       state.filter(({ id }) => id !== payload),
   },
 });

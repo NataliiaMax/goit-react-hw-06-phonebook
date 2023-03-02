@@ -1,4 +1,22 @@
-.listUses {
+.listUsers {
   margin: 20px 0 0;
   padding-left: 20px;
+}
+
+.itemUser {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonDelete {
+  width: 100px;
+  height: 40px;
+  padding: 5px 15px;
+  background-color: #fff;
+  border: 1px solid #747474;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #555;
+  cursor: pointer;
 }
