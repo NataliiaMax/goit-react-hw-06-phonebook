@@ -5,9 +5,9 @@ import style from './ContactList.module.css';
 
 export default function ContactList() {
   const dispatch = useDispatch();
-  const contactList = useSelector(state => state.contacts);
+  const contactList = useSelector(state => state.contacts.contacts);
   const contactFilter = useSelector(state => state.filter);
-  const normalizedFilterContacts = contactList.filter(contact => {
+  const normalizedFilterContacts = contactList?.filter(contact => {
     return contact.name.toLowerCase().includes(contactFilter);
   });
 
